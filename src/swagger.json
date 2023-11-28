@@ -1,0 +1,369 @@
+{
+	"openapi": "3.0.0",
+	"info": {
+		"title": "Data Pusher API",
+		"description": "This is a I'm Safe API documentation.",
+		"version": "1.0.0"
+	},
+	"servers": [
+		{
+			"url": "http://localhost:3000",
+			"description": "Local host server, exclusively for back-end developers."
+		}
+	],
+	"paths": {
+		"/accounts": {
+			"post": {
+				"summary": "Create Account",
+				"tags": [
+					"Account"
+				],
+				"requestBody": {
+					"$ref": "#/components/requestBodies/CreateAccountBody"
+				}
+			},
+			"get": {
+				"summary": "Get All Accounts",
+				"tags": [
+					"Account"
+				]
+			}
+		},
+		"/accounts/{accountId}": {
+			"put": {
+				"summary": "Update Account",
+				"tags": [
+					"Account"
+				],
+				"parameters": [
+					{
+						"in": "path",
+						"name": "accountId",
+						"schema": {
+							"type": "string"
+						},
+						"example": "f5334afa-3133-42f0-84f7-0a4e81d3ce42",
+						"required": true
+					}
+				],
+				"requestBody": {
+					"$ref": "#/components/requestBodies/UpdateAccountBody"
+				}
+			},
+			"delete": {
+				"summary": "Delete Account",
+				"tags": [
+					"Account"
+				],
+				"parameters": [
+					{
+						"in": "path",
+						"name": "accountId",
+						"schema": {
+							"type": "string"
+						},
+						"example": "f5334afa-3133-42f0-84f7-0a4e81d3ce42",
+						"required": true
+					}
+				]
+			}
+		},
+		"/destinations": {
+			"post": {
+				"summary": "Create Destination",
+				"tags": [
+					"Destination"
+				],
+				"requestBody": {
+					"$ref": "#/components/requestBodies/CreateDestinationBody"
+				}
+			}
+		},
+		"/destinations/{accountId}": {
+			"get": {
+				"summary": "Get specfic account Destinations",
+				"tags": [
+					"Destination"
+				],
+				"parameters": [
+					{
+						"in": "path",
+						"name": "accountId",
+						"schema": {
+							"type": "string"
+						},
+						"example": "f5334afa-3133-42f0-84f7-0a4e81d3ce42",
+						"required": true
+					}
+				]
+			}
+		},
+		"/destinations/{destinationId}": {
+			"put": {
+				"summary": "Update update specfic Destinations",
+				"tags": [
+					"Destination"
+				],
+				"parameters": [
+					{
+						"in": "path",
+						"name": "destinationId",
+						"schema": {
+							"type": "string"
+						},
+						"example": "ad27e29b-27a0-434f-83b0-c30e6053636c",
+						"required": true
+					}
+				],
+				"requestBody": {
+					"$ref": "#/components/requestBodies/UpdateDestinationBody"
+				}
+			},
+			"delete": {
+				"summary": "Delete specfic Destinations",
+				"tags": [
+					"Destination"
+				],
+				"parameters": [
+					{
+						"in": "path",
+						"name": "destinationId",
+						"schema": {
+							"type": "string"
+						},
+						"example": "ad27e29b-27a0-434f-83b0-c30e6053636c",
+						"required": true
+					}
+				]
+			}
+		},
+		"/server/incoming_data": {
+			"post": {
+				"summary": "Handle data",
+				"tags": [
+					"HandleData"
+				],
+				"parameters": [
+					{
+						"in": "header",
+						"name": "CL-X-TOKEN",
+						"schema": {
+							"type": "string"
+						},
+						"example": "3a8dae714063c587b4623659231f298740bdf698c27513c675adbcb302a8",
+						"required": true
+					}
+				],
+				"requestBody": {
+					"$ref": "#/components/requestBodies/DataHandlerBody"
+				}
+			}
+		}
+	},
+	"components": {
+		"securitySchemes": {
+			"bearerAuth": {
+				"type": "http",
+				"scheme": "bearer"
+			}
+		},
+		"requestBodies": {
+			"CreateAccountBody": {
+				"content": {
+					"application/json": {
+						"schema": {
+							"type": "object",
+							"properties": {
+								"email": {
+									"type": "string"
+								},
+								"accountName": {
+									"type": "string"
+								},
+								"website": {
+									"type": "string"
+								}
+							},
+							"example": {
+								"email": "user@example.com",
+								"accountName": "SampleAccount",
+								"website": "https://example.com"
+							},
+							"required": [
+								"email",
+								"accountName"
+							]
+						}
+					}
+				}
+			},
+			"UpdateAccountBody": {
+				"content": {
+					"application/json": {
+						"schema": {
+							"type": "object",
+							"properties": {
+								"email": {
+									"type": "string"
+								},
+								"accountName": {
+									"type": "string"
+								},
+								"website": {
+									"type": "string"
+								}
+							},
+							"example": {
+								"email": "user@example.com",
+								"accountName": "SampleAccount",
+								"website": "https://example.com"
+							}
+						}
+					}
+				}
+			},
+			"CreateDestinationBody": {
+				"content": {
+					"application/json": {
+						"schema": {
+							"type": "object",
+							"properties": {
+								"accountId": {
+									"type": "string"
+								},
+								"url": {
+									"type": "string"
+								},
+								"httpMethod": {
+									"type": "string"
+								},
+								"headers": {
+									"type": "object",
+									"properties": {
+										"APP_ID": {
+											"type": "string"
+										},
+										"APP_SECRET": {
+											"type": "string"
+										},
+										"ACTION": {
+											"type": "string"
+										},
+										"Content-Type": {
+											"type": "string"
+										},
+										"Accept": {
+											"type": "string"
+										}
+									}
+								}
+							},
+							"example": {
+								"accountId": "f5334afa-3133-42f0-84f7-0a4e81d3ce42",
+								"url": "https://destination.com",
+								"httpMethod": "POST",
+								"headers": {
+									"APP_ID": "1234APPID1234",
+									"APP_SECRET": "enwdj3bshwer43bjhjs9ereuinkjcnsiurew8s",
+									"ACTION": "user.update",
+									"Content-Type": "application/json",
+									"Accept": "*"
+								}
+							},
+							"required": [
+								"accountId",
+								"url",
+								"httpMethod",
+								"headers"
+							]
+						}
+					}
+				}
+			},
+			"UpdateDestinationBody": {
+				"content": {
+					"application/json": {
+						"schema": {
+							"type": "object",
+							"properties": {
+								"accountId": {
+									"type": "string"
+								},
+								"url": {
+									"type": "string"
+								},
+								"httpMethod": {
+									"type": "string"
+								},
+								"headers": {
+									"type": "object",
+									"properties": {
+										"APP_ID": {
+											"type": "string"
+										},
+										"APP_SECRET": {
+											"type": "string"
+										},
+										"ACTION": {
+											"type": "string"
+										},
+										"Content-Type": {
+											"type": "string"
+										},
+										"Accept": {
+											"type": "string"
+										}
+									}
+								}
+							},
+							"example": {
+								"accountId": "f5334afa-3133-42f0-84f7-0a4e81d3ce42",
+								"url": "https://destination.com",
+								"httpMethod": "POST",
+								"headers": {
+									"APP_ID": "1234APPID1234",
+									"APP_SECRET": "enwdj3bshwer43bjhjs9ereuinkjcnsiurew8s",
+									"ACTION": "user.update",
+									"Content-Type": "application/json",
+									"Accept": "*"
+								}
+							}
+						}
+					}
+				}
+			},
+			"DataHandlerBody": {
+				"content": {
+					"application/json": {
+						"schema": {
+							"type": "object",
+							"properties": {
+								"status": {
+									"type": "string"
+								}
+							},
+							"example": {
+								"status": "ACTIVE"
+							}
+						}
+					}
+				}
+			}
+		},
+		"schemas": {
+			"Error": {
+				"type": "object",
+				"properties": {
+					"error": {
+						"type": "string"
+					}
+				},
+				"example": {
+					"error": {
+						"message": "account id is required"
+					}
+				}
+			}
+		}
+	}
+}
