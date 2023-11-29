@@ -28,8 +28,8 @@ const getDestinationsUsingId = (destinationId) => {
 	return new Promise((resolve, reject) => {
 		getDB().all('SELECT * FROM destinations WHERE id = ?', [destinationId], async (err, destination) => {
 			if (err) reject({ statusCode: 403, error: err });
-			destination.headers = JSON.parse(dest.headers)
-			resolve(destination);
+			if (destination[0]?.headers) destination[0].headers = JSON.parse(destination[0].headers)
+			resolve(destination[0]);
 		});
 	});
 }

@@ -4,7 +4,7 @@ const createDestinationInputValidation = (req, res, next) => {
 	const createDeatinationSchema = Joi.object({
 		accountId: Joi.string().required(),
 		url: Joi.string().required(),
-		httpMethod: Joi.string().required(),
+		httpMethod: Joi.string().valid("POST","PUT","GET","DELETE","PATCH").required(),
 		headers: Joi.object().required()
 	});
 
@@ -15,10 +15,10 @@ const createDestinationInputValidation = (req, res, next) => {
 
 const updateDestinationInputValidation = (req, res, next) => {
 	const updateDestinationSchema = Joi.object({
-		accountId: Joi.string().required(),
-		url: Joi.string().required(),
-		httpMethod: Joi.string().valid("POST","PUT","GET","DELETE","PATCH").required(),
-		headers: Joi.object().required()
+		accountId: Joi.string().optional(),
+		url: Joi.string().optional(),
+		httpMethod: Joi.string().valid("POST","PUT","GET","DELETE","PATCH").optional(),
+		headers: Joi.object().optional()
 	});
 
 	const validate = updateDestinationSchema.validate(req.body);

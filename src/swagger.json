@@ -20,13 +20,19 @@
 				],
 				"requestBody": {
 					"$ref": "#/components/requestBodies/CreateAccountBody"
+				},
+				"responses": {
+					"200": {}
 				}
 			},
 			"get": {
 				"summary": "Get All Accounts",
 				"tags": [
 					"Account"
-				]
+				],
+				"responses": {
+					"200": {}
+				}
 			}
 		},
 		"/accounts/{accountId}": {
@@ -48,6 +54,9 @@
 				],
 				"requestBody": {
 					"$ref": "#/components/requestBodies/UpdateAccountBody"
+				},
+				"responses": {
+					"200": {}
 				}
 			},
 			"delete": {
@@ -65,7 +74,10 @@
 						"example": "f5334afa-3133-42f0-84f7-0a4e81d3ce42",
 						"required": true
 					}
-				]
+				],
+				"responses": {
+					"200": {}
+				}
 			}
 		},
 		"/destinations": {
@@ -76,6 +88,9 @@
 				],
 				"requestBody": {
 					"$ref": "#/components/requestBodies/CreateDestinationBody"
+				},
+				"responses": {
+					"200": {}
 				}
 			}
 		},
@@ -95,7 +110,10 @@
 						"example": "f5334afa-3133-42f0-84f7-0a4e81d3ce42",
 						"required": true
 					}
-				]
+				],
+				"responses": {
+					"200": {}
+				}
 			}
 		},
 		"/destinations/{destinationId}": {
@@ -117,6 +135,9 @@
 				],
 				"requestBody": {
 					"$ref": "#/components/requestBodies/UpdateDestinationBody"
+				},
+				"responses": {
+					"200": {}
 				}
 			},
 			"delete": {
@@ -134,7 +155,10 @@
 						"example": "ad27e29b-27a0-434f-83b0-c30e6053636c",
 						"required": true
 					}
-				]
+				],
+				"responses": {
+					"200": {}
+				}
 			}
 		},
 		"/server/incoming_data": {
@@ -156,6 +180,9 @@
 				],
 				"requestBody": {
 					"$ref": "#/components/requestBodies/DataHandlerBody"
+				},
+				"responses": {
+					"200": {}
 				}
 			}
 		}

@@ -66,7 +66,7 @@ const deleteDestination = async (req) => {
 
 	if (!destination) throw ({ status: false, error: "Destination is not exist", statusCode: 403 });
 
-	await destinationRepository.deleteDestinationUsingId(accountId);
+	await destinationRepository.deleteDestinationUsingId(destinationId);
 
 	return { status: true, data: "Successfully deleted" }
 

@@ -3,7 +3,6 @@ const { getDB } = require("../utils/DB/DB.connect");
 const create = (data) => {
 	let { accountId, email, accountName, appSecretToken, website } = data;
 	return new Promise((resolve, reject) => {
-
 		getDB().run(
 			'INSERT INTO accounts (id, email, accountName, appSecretToken, website) VALUES (?, ?, ?, ?, ?)',
 			[accountId, email, accountName, appSecretToken, website],

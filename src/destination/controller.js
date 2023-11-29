@@ -26,7 +26,7 @@ router.get('/:accountId', async (req, res, next) => {
 });
 
 
-router.put('/:destinationId', [updateDestinationInputValidation], async (req, res) => {
+router.put('/:destinationId', [updateDestinationInputValidation], async (req, res, next) => {
 
 	try {
 		const result = await destinationService.updateDestination(req);
@@ -39,9 +39,9 @@ router.put('/:destinationId', [updateDestinationInputValidation], async (req, re
 });
 
 
-router.delete('/:destinationId', async (req, res) => {
+router.delete('/:destinationId', async (req, res, next) => {
 	try {
-		const result = await destinationService.getAccountDestination(req);
+		const result = await destinationService.deleteDestination(req);
 		if (result.data) return res.status(200).send(result.data);
 	} catch (error) {
 		console.error("Error in get destinations ::", error);
